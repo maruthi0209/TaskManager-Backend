@@ -35,7 +35,28 @@ console.log('Firebase Admin SDK initialized for backend!');
 const app = express();
 
 // Middleware
-app.use(cors());
+
+// IMPORTANT: Configure CORS middleware
+const allowedOrigins = [
+  'http://localhost:5173', // Your React development server
+  // 'https://your-deployed-frontend.vercel.app', // If you deploy your frontend, add its URL here
+  // Add other frontend origins if necessary
+];
+const corsOptions = {
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allow common HTTP methods
+  credentials: true, // Allow cookies to be sent with requests (if you use sessions/cookies)
+  optionsSuccessStatus: 200 // Some older browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 app.use(helmet());
 app.use(express.json());
 app.use(morgan('dev'));
