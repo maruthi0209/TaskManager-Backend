@@ -39,7 +39,7 @@ const app = express();
 // IMPORTANT: Configure CORS middleware
 const allowedOrigins = [
   'http://localhost:5173', // Your React development server
-  // 'https://your-deployed-frontend.vercel.app', // If you deploy your frontend, add its URL here
+  'https://maruthitaskmanager.netlify.app', // If you deploy your frontend, add its URL here
   // Add other frontend origins if necessary
 ];
 const corsOptions = {
