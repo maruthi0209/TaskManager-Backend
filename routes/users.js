@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const authController = require('../controllers/authenticationCont');
+const authController = require('../controllers/authController');
 
 const admin = require('firebase-admin'); // Import Firebase Admin SDK
 const jwt = require('jsonwebtoken');
@@ -69,7 +69,7 @@ router.post('/google-firebase', async (req, res) => {
 
 // Protect all routes after this middleware
 router.use(authController.protect);
-router.use(authController.restrictTo('admin'));
+// router.use(authController.restrictTo('admin'));
 
 router
   .route('/')

@@ -4,18 +4,17 @@ const AppError = require('../utils/appError');
 exports.getAllTasks = async (req, res, next) => {
   try {
     const tasks = await Task.find({ user: req.user.id });
-
     res.status(200).json({
       status: 'success',
       results: tasks.length,
-      data: {
-        tasks
-      }
+      data: { tasks }
     });
   } catch (err) {
     next(err);
   }
 };
+
+// Add other required methods (createTask, updateTask, deleteTask, getTaskAnalytics)
 
 exports.createTask = async (req, res, next) => {
   try {
