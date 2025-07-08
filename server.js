@@ -38,9 +38,8 @@ const app = express();
 
 // IMPORTANT: Configure CORS middleware
 const allowedOrigins = [
-  'http://localhost:5173', // Your React development server
-  'https://maruthitaskmanager.netlify.app', // If you deploy your frontend, add its URL here
-  // Add other frontend origins if necessary
+  'http://localhost:5173',
+  'https://maruthitaskmanager.netlify.app',
 ];
 const corsOptions = {
   origin: function (origin, callback) {
@@ -56,7 +55,7 @@ const corsOptions = {
   credentials: true, // Allow cookies to be sent with requests (if you use sessions/cookies)
   optionsSuccessStatus: 200 // Some older browsers (IE11, various SmartTVs) choke on 204
 };
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(morgan('dev'));
